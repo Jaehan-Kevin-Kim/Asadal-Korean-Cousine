@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { init } from "@emailjs/browser";
+import emailjs from "emailjs-com";
+import Swal from "sweetalert2";
 import logo from "../../assets/logo.png";
 import {
   Container,
@@ -11,17 +14,37 @@ import {
   Submit,
 } from "./styles";
 
+const SERVICE_ID = process.env.REACT_APP_SERVICE_ID;
+const TEMPLATE_ID = process.env.REACT_APP_TEMPLATE_ID;
+const USER_ID = process.env.REACT_APP_USER_ID;
+
 const Page2 = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
-  const [inquiry, setInquiry] = useState("");
+  const [message, setMessage] = useState("");
+  const emailForm = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
-    console.log(`${name}, ${phone}, ${email}, ${subject}, ${inquiry}`);
+
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, emailForm.current, USER_ID).then(
+      (result) => {
+        Swal.fire({
+          icon: "success",
+          title: "Message Sent Successfully",
+        });
+      },
+      (error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Ooops, something went wrong",
+          text: error.text,
+        });
+      },
+    );
+    e.target.reset();
   };
 
   return (
@@ -35,10 +58,9 @@ const Page2 = () => {
           Email us to place your order today or ask us for possible options!
         </Paragraph>
       </SectionLeft>
-      {/* email 용 npm library 다운 받기 */}
-      {/* Form 양식, email 보내느 것 처럼 변경하기 */}
+
       <SectionRight>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} ref={emailForm}>
           <Input>
             <label htmlFor="name">Name*</label>
             <input
@@ -65,20 +87,20 @@ const Page2 = () => {
               value={phone}></input>
           </Input>
           <Input>
-            <label htmlFor="message">Message</label>
+            <label htmlFor="subject">Subject</label>
             <input
               type="text"
-              name="message"
+              name="subject"
               onChange={(e) => setSubject(e.target.value)}
               value={subject}></input>
           </Input>
           <Input>
-            <label htmlFor="additional">Additional Details</label>
+            <label htmlFor="message">Additional Details</label>
             <textarea
               rows="10"
-              name="additional"
-              onChange={(e) => setInquiry(e.target.value)}
-              value={inquiry}></textarea>
+              name="message"
+              onChange={(e) => setMessage(e.target.value)}
+              value={message}></textarea>
           </Input>
           <Input>
             {/* <Submit type="submit"> Send Email</Submit> */}

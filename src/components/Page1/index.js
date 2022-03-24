@@ -22,11 +22,10 @@ import SkipLogo from "../../assets/skipLogo.png";
 import Ue from "../../assets/UberEats.jpg";
 import Uber from "../../assets/UberEatsLogo.jpg";
 import Fan from "../../assets/Fantuan.jpg";
+
 const Page1 = () => {
   const openSkipTheDish = () => {
-    window.open(
-      "https://www.ubereats.com/ca/store/asadal-korean-cuisine/nj4Tq_mIRRi0hIvEKXyOVA?diningMode=DELIVERY/",
-    );
+    window.open("https://www.skipthedishes.com/asadal-korean-cuisine");
   };
   const openUberEats = () => {
     window.open(

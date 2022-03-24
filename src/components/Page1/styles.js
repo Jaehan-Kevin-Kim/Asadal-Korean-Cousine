@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
-  width: 100vw;
+  /* width: 100vw; */
   height: 100vh;
   position: relative;
   z-index: 1;
@@ -9,7 +9,6 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
 export const HomeBg = styled.div`
   position: absolute;
   top: 0;

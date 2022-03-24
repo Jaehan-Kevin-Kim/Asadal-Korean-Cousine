@@ -13,7 +13,8 @@ import {
 } from "./styles";
 import Instagram from "../../assets/instagram2.png";
 import Asadal from "../../assets/Asadal.png";
- // 폰트 통일 Roboto Slab
+import menuPdf from "../../assets/menu.pdf";
+// 폰트 통일 Roboto Slab
 const Navbar = () => {
   const [scrollNav, setScrollNav] = useState(false);
 
@@ -33,6 +34,10 @@ const Navbar = () => {
     window.open("https://www.instagram.com/asadal_korean_cuisine/");
   };
 
+  const openMenu = () => {
+    window.open(menuPdf);
+  };
+
   return (
     <Nav scrollNav={scrollNav}>
       <NavContainer>
@@ -41,9 +46,9 @@ const Navbar = () => {
           Asadal Korean Cuisine */}
           <NavHome src={Asadal} />
         </NavLogo>
-        <NavMenu></NavMenu>
+        <NavMenu>
           <NavItem>
-            <NavLinks>Menu</NavLinks>
+            <NavLinks onClick={openMenu}>Menu</NavLinks>
           </NavItem>
           <NavItem>
             <NavLinks

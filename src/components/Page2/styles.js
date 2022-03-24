@@ -70,6 +70,8 @@ export const Input = styled.div`
   textarea {
     width: 100%;
     border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1.1rem;
   }
 `;
 
